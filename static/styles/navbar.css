@@ -1,0 +1,85 @@
+/* navbar.css */
+
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+
+a {
+    color: #00aaff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Navbar Styles */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #252525;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo span {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #00aaff;
+}
+
+.search-bar {
+    flex-grow: 1;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.search-bar form {
+    display: flex;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 8px 15px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+
+.search-bar input::placeholder {
+    color: #888;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: #00aaff;
+}
+
+.user-links {
+    display: flex;
+    align-items: center;
+}
+
+.user-links span {
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.user-links a {
+    margin-left: 15px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.user-links a:hover {
+    background-color: #00aaff;
+    color: #fff;
+}
