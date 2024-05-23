@@ -1,16 +1,31 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/userQuizes.css' %}">
+    <title>User Quizzes</title>
+</head>
+<body>
 
+{% include 'navbar.html' %}
 
-<div>
+<div class="quizzes-container">
+    <h3>{{ user.username }} Quizzes!</h3>
 
-    <h3>{{ user.username }} quizes!</h3>
-
-    <div>{% for q in quizzes %}
-        <a href="{% url 'playQuiz' q.id %}" ><h4>Name : {{ q.quizName  }}</h4></a>
-        <h5>Number of Questions: {{ q.numberOfQuestions  }}</h5>
-        <a href="{% url 'changePublicity' q.id %}"><h5>Change Publicity: {{ q.public }}</h5></a>
-        <a href="{% url 'deleteQuiz' q.id %}"><h4>DELETE QUIZ</h4></a>
-<hr>
+    <div class="quiz-list">
+        {% for q in quizzes %}
+        <div class="quiz-item">
+            <a href="{% url 'playQuiz' q.id %}" class="quiz-name">Name: {{ q.quizName }}</a>
+            <p>Number of Questions: {{ q.numberOfQuestions }}</p>
+            <a href="{% url 'changePublicity' q.id %}" class="quiz-publicity">Change Publicity: {{ q.public }}</a>
+            <a href="{% url 'deleteQuiz' q.id %}" class="delete-quiz">DELETE QUIZ</a>
+        </div>
         {% endfor %}
     </div>
-
 </div>
+
+</body>
+</html>
