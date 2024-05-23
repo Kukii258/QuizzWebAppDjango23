@@ -47,7 +47,7 @@ def loginPage(request):
         else:
             messages.error(request, 'Usermae or password not exist')
     context = {'page':page}
-    return render(request, 'main/templates/templates/main/login_register.html', context)
+    return render(request, 'main/login_register.html', context)
 def logoutUser(request):
     request.session.flush()
     logout(request)
@@ -68,7 +68,7 @@ def registerPage(request):
             messages.error(request, 'Error.')
 
 
-    return render(request, 'main/templates/templates/main/login_register.html', {'form':form})
+    return render(request, 'main/login_register.html', {'form':form})
 
 def homePage(request):
 
@@ -86,7 +86,7 @@ def homePage(request):
 
     context = {'quiz': quiz}
 
-    return render(request, 'main/templates/templates/main/homePage.html', context)
+    return render(request, 'main/homePage.html', context)
 
 @login_required(login_url='/login')
 def createQuiz(request):
@@ -101,7 +101,7 @@ def createQuiz(request):
             return redirect('createQuestions', quiz_id=quiz.id)
 
     context = {'form': form}
-    return render(request, 'main/templates/templates/main/createQuiz.html', context)
+    return render(request, '/main/createQuiz.html', context)
 @login_required(login_url='/login')
 def createQuestions(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
@@ -131,7 +131,7 @@ def createQuestions(request, quiz_id):
 
 
     context = {'form': form, 'quiz': quiz,'error_message': error_message}
-    return render(request, 'main/templates/templates/main/createQuestions.html', context)
+    return render(request, 'main/createQuestions.html', context)
 
 
 def prePlayCheck(request, quiz_id):
@@ -177,7 +177,7 @@ def playQuiz(request, quiz_id):
                 request.method = 'GET'
 
     context = {'question': questionsList[request.session['counter']], 'quiz': quiz}
-    return render(request, 'main/templates/templates/main/playQuiz.html', context)
+    return render(request, 'main/playQuiz.html', context)
 
 def userStatistics(request, question_id, answer_id):
 
@@ -213,7 +213,7 @@ def stats(request):
 
     context = {'stats':stats,'quizStats':quizStats}
 
-    return render(request, 'main/templates/templates/main/stats.html', context)
+    return render(request, 'main/stats.html', context)
 
 
 @receiver(post_save, sender=User)
@@ -230,7 +230,7 @@ def userQuizes(request):
 
     context = {'user':user, 'quizzes':quizzes}
 
-    return render(request, 'main/templates/templates/main/userQuizes.html', context)
+    return render(request, 'main/userQuizes.html', context)
 
 def quizStats(request,quiz_id,time):
 
@@ -263,7 +263,7 @@ def prePlayQuiz(request,quiz_id):
 
     context = {'quizStats':quizStats,'q':quiz}
 
-    return render(request, 'main/templates/templates/main/prePlayQuiz.html', context)
+    return render(request, 'main/prePlayQuiz.html', context)
 
 def deleteQuiz(request,quiz_id):
 
@@ -293,4 +293,4 @@ def afterPlayQuiz(request,quiz_id):
 
     context = {'quiz':quiz,'questions':answer,'time':time}
 
-    return render(request, 'main/templates/templates/main/afterPlayQuiz.html', context)
+    return render(request, 'main/afterPlayQuiz.html', context)
