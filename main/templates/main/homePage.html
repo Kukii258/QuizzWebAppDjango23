@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main Page</title>
+</head>
+<body>
+
+    {% include 'navbar.html' %}
+
+<h3>Create New Quiz</h3>
+<button><a href="{% url 'createQuiz' %}">Create Quiz</a></button>
+
+<div>
+    <h3>List of Quizzes</h3>
+    <div>{% for q in quiz %}
+        <a href="{% url 'prePlayQuiz' q.id %}" ><h4>Name : {{ q.quizName  }}</h4></a>
+        <h5>Author: {{ q.author }}</h5>
+        <h5>Number of Questions:{{ q.numberOfQuestions  }}</h5>
+        <hr>
+
+        {% endfor %}
+    </div>
+
+</div>
+
+</body>
+</html>

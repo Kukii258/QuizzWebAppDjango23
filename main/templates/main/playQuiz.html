@@ -1,0 +1,13 @@
+
+<div>
+    <h2>Question: {{ question.question }}</h2>
+</div>
+<div>
+    <form method="POST" action="{% url 'playQuiz' quiz.id %}">
+        {% csrf_token %}
+        <h4>Answer A) <button type="submit" name="answer" value="{{ question.answer1 }}">{{ question.answer1 }}</button></h4>
+        <h4>Answer B) <button type="submit" name="answer" value="{{ question.answer2 }}">{{ question.answer2 }}</button></h4>
+        <h4>Answer C) <button type="submit" name="answer" value="{{ question.answer3 }}">{{ question.answer3 }}</button></h4>
+        <h4>Answer D) <button type="submit" name="answer" value="{{ question.answer4 }}">{{ question.answer4 }}</button></h4>
+    </form>
+</div>

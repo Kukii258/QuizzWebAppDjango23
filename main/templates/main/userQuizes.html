@@ -1,0 +1,16 @@
+
+
+<div>
+
+    <h3>{{ user.username }} quizes!</h3>
+
+    <div>{% for q in quizzes %}
+        <a href="{% url 'playQuiz' q.id %}" ><h4>Name : {{ q.quizName  }}</h4></a>
+        <h5>Number of Questions: {{ q.numberOfQuestions  }}</h5>
+        <a href="{% url 'changePublicity' q.id %}"><h5>Change Publicity: {{ q.public }}</h5></a>
+        <a href="{% url 'deleteQuiz' q.id %}"><h4>DELETE QUIZ</h4></a>
+<hr>
+        {% endfor %}
+    </div>
+
+</div>

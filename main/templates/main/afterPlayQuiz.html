@@ -1,0 +1,16 @@
+<h3>Quiz Name: {{ quiz.quizName }}</h3>
+
+<div>
+    {% for q in questions %}
+    <h4>Question: {{ q.question }}</h4>
+    <h4>Your Answer: {{ q.userAnswer}}</h4>
+    <h4>Correct Answer: {{ q.rightAnswer}}</h4>
+    <hr>
+    {% endfor %}
+</div>
+
+<div>
+    <h4>Time : {{ time }}</h4>
+</div>
+
+<a href="{% url 'homePage' %}"><h4>Back to Main Page</h4></a>

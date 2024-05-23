@@ -1,0 +1,18 @@
+
+  <a href="{% url 'prePlayCheck' q.id %}" ><h4>Play : {{ q.quizName  }}</h4></a>
+
+<div>
+
+{% for qs in quizStats%}
+
+    Name : {{ qs.user }}
+    --- Time Played: {{ qs.timePlayed }}
+    --- Time: {{ qs.time }}
+    --- Quiz: {{ qs.quiz }}
+<br>
+<br>
+{% endfor %}
+
+</div>
+
+
