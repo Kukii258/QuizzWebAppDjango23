@@ -1,31 +1,37 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/homePage.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/navbar.css' %}">
     <title>Main Page</title>
 </head>
 <body>
-
     {% include 'navbar.html' %}
 
-<h3>Create New Quiz</h3>
-<button><a href="{% url 'createQuiz' %}">Create Quiz</a></button>
 
-<div>
-    <h3>List of Quizzes</h3>
-    <div>{% for q in quiz %}
-        <a href="{% url 'prePlayQuiz' q.id %}" ><h4>Name : {{ q.quizName  }}</h4></a>
-        <h5>Author: {{ q.author }}</h5>
-        <h5>Number of Questions:{{ q.numberOfQuestions  }}</h5>
-        <hr>
+    <div class="container">
+        <h3>Create New Quiz</h3>
+        <button><a href="{% url 'createQuiz' %}">Create Quiz</a></button>
 
-        {% endfor %}
+        <div class="quiz-list">
+            <h3>List of Quizzes</h3>
+            <div>{% for q in quiz %}
+                <div class="quiz-item">
+                    <a href="{% url 'prePlayQuiz' q.id %}">
+                        <h4>Name: {{ q.quizName }}</h4>
+                    </a>
+                    <h5>Author: {{ q.author }}</h5>
+                    <h5>Number of Questions: {{ q.numberOfQuestions }}</h5>
+                </div>
+                <hr>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-
-</div>
 
 </body>
 </html>
