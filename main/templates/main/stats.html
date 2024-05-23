@@ -1,36 +1,55 @@
-<div style="margin-bottom: 20px;">
-    <h3>{{ user.username }} Stats</h3>
-    <p>Quiz Played: {{ stats.quizPlayed }}</p>
-    <p>Correct Answers: {{ stats.correctAnswers }}</p>
-    <p>Wrong Answers: {{ stats.wrongAnswers }}</p>
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/userStats.css' %}">
+    <title>User Stats</title>
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="stats-container">
+    <div class="user-stats">
+        <h3>{{ user.username }} Stats</h3>
+        <p>Quiz Played: {{ stats.quizPlayed }}</p>
+        <p>Correct Answers: {{ stats.correctAnswers }}</p>
+        <p>Wrong Answers: {{ stats.wrongAnswers }}</p>
+    </div>
+
+    <div class="played-quizzes">
+        <h3>{{ user.username }} Played Quizzes</h3>
+        {% for q in quizStats %}
+        <div class="quiz-stats">
+            <table class="quiz-table">
+                <thead>
+                    <tr>
+                        <th>Quiz</th>
+                        <th>Correct Answers</th>
+                        <th>Wrong Answers</th>
+                        <th>Time</th>
+                        <th>Time Played</th>
+                        <th>Date Played</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ q.quiz }}</td>
+                        <td>{{ q.correctAnswers }}</td>
+                        <td>{{ q.wrongAnswers }}</td>
+                        <td>{{ q.time }} s</td>
+                        <td>{{ q.timePlayed }}</td>
+                        <td>{{ q.datePlayed}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
-<div>
-    <h3>{{ user.username }} played Quizzes</h3>
-    {% for q in quizStats %}
-    <div style="margin-bottom: 20px;">
-        <table style="width: 60%; border-collapse: collapse;text-align: center">
-            <thead>
-                <tr style="border: 1px solid black">
-                    <th style="padding: 10px;">Quiz</th>
-                    <th style="padding: 10px;">Correct Answers</th>
-                    <th style="padding: 10px;">Wrong Answers</th>
-                    <th style="padding: 10px;">Time</th>
-                    <th style="padding: 10px;">Time Played</th>
-                    <th style="padding: 10px;">Date Played</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="padding: 10px;">{{ q.quiz }}</td>
-                    <td style="padding: 10px;">{{ q.correctAnswers }}</td>
-                    <td style="padding: 10px;">{{ q.wrongAnswers }}</td>
-                    <td style="padding: 10px;">{{ q.time }} s</td>
-                    <td style="padding: 10px;">{{ q.timePlayed }}</td>
-                    <td style="padding: 10px;">{{ q.datePlayed}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    {% endfor %}
-</div>
+</body>
+</html>
