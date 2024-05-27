@@ -101,7 +101,7 @@ def createQuiz(request):
             return redirect('createQuestions', quiz_id=quiz.id)
 
     context = {'form': form}
-    return render(request, '/main/createQuiz.html', context)
+    return render(request, 'main/createQuiz.html', context)
 @login_required(login_url='/login')
 def createQuestions(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
