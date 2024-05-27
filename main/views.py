@@ -95,12 +95,16 @@ def createQuiz(request):
         form = QuizForm(request.POST)
         if form.is_valid():
             quiz = form.save(commit=False)
-            quiz.author = request.user
-            quiz.save()
-            return redirect('createQuestions', quiz_id=quiz.id)
+            if quiz.numberOfQuestions > 0:
+                quiz.author = request.user
+                quiz.save()
+                return redirect('createQuestions', quiz_id=quiz.id)
 
     context = {'form': form}
     return render(request, 'main/createQuiz.html', context)
+
+
+
 @login_required(login_url='/login')
 def createQuestions(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
