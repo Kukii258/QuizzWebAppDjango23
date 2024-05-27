@@ -1,9 +1,7 @@
-/* userQuizzes.css */
 
-/* General Styles */
 body {
     margin: 0;
-    padding: 80px 0 20px 0; /* Adjust padding to account for fixed navbar */
+    padding: 80px 0 20px 0;
     font-family: 'Arial', sans-serif;
     background-color: #1a1a1a;
     color: #f0f0f0;
@@ -12,7 +10,7 @@ body {
     align-items: center;
 }
 
-/* Quizzes Container */
+
 .quizzes-container {
     width: 60%;
     margin: 20px auto;
@@ -24,7 +22,7 @@ body {
 
 .quizzes-container h3 {
     text-align: center;
-    color: #ffd700; /* Gold color for headings */
+    color: #ffd700;
     margin-bottom: 30px;
 }
 
@@ -49,7 +47,7 @@ body {
 
 .quiz-name, .quiz-publicity, .delete-quiz {
     display: block;
-    color: #ffd700; /* Gold color */
+    color: #ffd700;
     text-decoration: none;
     margin-bottom: 5px;
 }
@@ -66,14 +64,14 @@ body {
 .quiz-publicity, .delete-quiz {
     display: inline-block;
     padding: 5px 10px;
-    border: 1px solid #00aaff; /* Blue color */
+    border: 1px solid #00aaff;
     border-radius: 5px;
     color: #fff;
-    background-color: #007bff; /* Blue color */
+    background-color: #007bff;
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .quiz-publicity:hover, .delete-quiz:hover {
-    background-color: #00aaff; /* Darker blue color on hover */
-    border-color: #00aaff; /* Darker blue color on hover */
+    background-color: #00aaff;
+    border-color: #00aaff;
 }

@@ -1,6 +1,4 @@
-/* homePage.css */
 
-/* General Styles */
 body {
     background-color: #1a1a1a;
     color: #f0f0f0;
@@ -33,7 +31,7 @@ hr {
     margin: 20px 0;
 }
 
-/* Buttons */
+
 button {
     background-color: #007bff;
     border: none;
@@ -60,7 +58,7 @@ button a:hover {
     text-decoration: none;
 }
 
-/* Container */
+
 .container {
     width: 80%;
     margin: 20px auto;
@@ -70,7 +68,6 @@ button a:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Quiz List */
 .quiz-list {
     margin-top: 20px;
 }
@@ -89,7 +86,7 @@ button a:hover {
 }
 
 .quiz-item h4 {
-    color: #ffd700; /* Gold color for quiz name */
+    color: #ffd700;
 }
 
 .quiz-item h5 {

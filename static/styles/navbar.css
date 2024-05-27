@@ -1,12 +1,11 @@
-/* navbar.css */
 
-/* General Styles */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
     background-color: #1a1a1a;
     color: #f0f0f0;
+    min-height: 10vh;
 }
 
 a {
@@ -18,14 +17,21 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Navbar Styles */
+
 nav {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
     background-color: #252525;
+    width: 80%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+}
+
+.logo {
+    flex: 1;
 }
 
 .logo span {
@@ -35,13 +41,15 @@ nav {
 }
 
 .search-bar {
-    flex-grow: 1;
-    margin-left: 50px;
-    margin-right: 50px;
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
 }
 
 .search-bar form {
-    display: flex;
+    width: 100%;
+    max-width: 400px;
 }
 
 .search-bar input {
@@ -64,12 +72,8 @@ nav {
 
 .user-links {
     display: flex;
-    align-items: center;
-}
-
-.user-links span {
-    margin-right: 15px;
-    font-weight: bold;
+    flex: 1;
+    justify-content: flex-end;
 }
 
 .user-links a {
@@ -82,4 +86,28 @@ nav {
 .user-links a:hover {
     background-color: #00aaff;
     color: #fff;
+}
+
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-bar {
+        margin: 10px 0;
+        order: 2;
+    }
+
+    .user-links {
+        justify-content: center;
+        margin: 10px 0;
+        order: 3;
+    }
+
+    .logo {
+        order: 1;
+        text-align: center;
+    }
 }

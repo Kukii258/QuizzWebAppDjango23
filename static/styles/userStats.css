@@ -1,12 +1,10 @@
-/* userStats.css */
 
-/* General Styles */
 body {
     background-color: #1a1a1a;
     color: #f0f0f0;
     font-family: 'Arial', sans-serif;
     margin: 0;
-    padding: 80px 0 20px 0; /* Adjust padding to account for fixed navbar */
+    padding: 80px 0 20px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +12,7 @@ body {
     min-height: 100vh;
 }
 
-/* Container */
+
 .stats-container {
     width: 80%;
     margin: 20px auto;
@@ -30,7 +28,7 @@ body {
 }
 
 .user-stats h3 {
-    color: #ffd700; /* Gold color for headings */
+    color: #ffd700;
     margin-bottom: 10px;
 }
 
@@ -40,7 +38,7 @@ body {
     font-size: 18px;
 }
 
-/* Quiz Table */
+
 .quiz-table {
     width: 100%;
     border-collapse: collapse;
@@ -58,7 +56,7 @@ body {
 }
 
 .quiz-table th {
-    background-color: #3a3a3a; /* Subtle dark color for table headers */
+    background-color: #3a3a3a;
     color: #f0f0f0;
 }
 
