@@ -72,3 +72,7 @@ body {
 .quiz-stats {
     margin-bottom: 20px;
 }
+.quiz-table-wrapper{
+    width: 100%;
+    overflow-x: auto;
+  }
