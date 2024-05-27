@@ -1,18 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz Page</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/prePlayQuiz.css' %}">
+</head>
+<body>
+{% include 'navbar.html' %}
 
-  <a href="{% url 'prePlayCheck' q.id %}" ><h4>Play : {{ q.quizName  }}</h4></a>
+    <div class="container">
+        <a href="{% url 'prePlayCheck' q.id %}" class="play-link"><h4>Play: {{ q.quizName }}</h4></a>
 
-<div>
-
-{% for qs in quizStats%}
-
-    Name : {{ qs.user }}
-    --- Time Played: {{ qs.timePlayed }}
-    --- Time: {{ qs.time }}
-    --- Quiz: {{ qs.quiz }}
-<br>
-<br>
-{% endfor %}
-
-</div>
-
-
+        <div class="quiz-stats">
+            {% for qs in quizStats %}
+            <div class="quiz-stat">
+                <p><span class="label">Name:</span> {{ qs.user }}</p>
+                <p><span class="label">Time Played:</span> {{ qs.timePlayed }}</p>
+                <p><span class="label">Time:</span> {{ qs.time }}</p>
+                <p><span class="label">Quiz:</span> {{ qs.quiz }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

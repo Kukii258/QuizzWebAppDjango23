@@ -1,16 +1,27 @@
-<h3>Quiz Name: {{ quiz.quizName }}</h3>
-
-<div>
-    {% for q in questions %}
-    <h4>Question: {{ q.question }}</h4>
-    <h4>Your Answer: {{ q.userAnswer}}</h4>
-    <h4>Correct Answer: {{ q.rightAnswer}}</h4>
-    <hr>
-    {% endfor %}
-</div>
-
-<div>
-    <h4>Time : {{ time }}</h4>
-</div>
-
-<a href="{% url 'homePage' %}"><h4>Back to Main Page</h4></a>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/afterPlayQuiz.css' %}">
+</head>
+<body>
+    <h3>Quiz Name: {{ quiz.quizName }}</h3>
+    <div class="quiz-container">
+        {% for q in questions %}
+        <div class="question-container">
+            <h4>Question: {{ q.question }}</h4>
+            <h4>Your Answer: {{ q.userAnswer }}</h4>
+            <h4>Correct Answer: {{ q.rightAnswer }}</h4>
+            <hr>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="time-container">
+        <h4>Time : {{ time }}</h4>
+    </div>
+    <a href="{% url 'homePage' %}"><h4>Back to Main Page</h4></a>
+</body>
+</html>

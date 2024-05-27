@@ -1,13 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz Question</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/PlayQuiz.css' %}">
+</head>
+<body>
+<div class="quiz-container">
+    <div class="question-container">
+        <h2>Question: {{ question.question }}</h2>
+    </div>
+    <div class="answers-container">
+        <form id="quiz-form" method="POST" action="{% url 'playQuiz' quiz.id %}">
+            {% csrf_token %}
+            <div class="answer">
+                <h4>Answer A) <button type="button" name="answer" value="{{ question.answer1 }}" class="answer-btn answer1" onclick="selectAnswer('{{ question.answer1 }}',1)">{{ question.answer1 }}</button></h4>
+            </div>
+            <div class="answer">
+                <h4>Answer B) <button type="button" name="answer" value="{{ question.answer2 }}" class="answer-btn answer2" onclick="selectAnswer('{{ question.answer2 }}',2)">{{ question.answer2 }}</button></h4>
+            </div>
+            <div class="answer">
+                <h4>Answer C) <button type="button" name="answer" value="{{ question.answer3 }}" class="answer-btn answer3" onclick="selectAnswer('{{ question.answer3 }}',3)">{{ question.answer3 }}</button></h4>
+            </div>
+            <div class="answer">
+                <h4>Answer D) <button type="button" name="answer" value="{{ question.answer4 }}" class="answer-btn answer4" onclick="selectAnswer('{{ question.answer4 }}',4)">{{ question.answer4 }}</button></h4>
+            </div>
+            <div class="answer">
+                <h4> <button  id="selectedAnswer" type="submit" name="answer" >Submit</button></h4>
+            </div>
+        </form>
+    </div>
+</div>
 
-<div>
-    <h2>Question: {{ question.question }}</h2>
-</div>
-<div>
-    <form method="POST" action="{% url 'playQuiz' quiz.id %}">
-        {% csrf_token %}
-        <h4>Answer A) <button type="submit" name="answer" value="{{ question.answer1 }}">{{ question.answer1 }}</button></h4>
-        <h4>Answer B) <button type="submit" name="answer" value="{{ question.answer2 }}">{{ question.answer2 }}</button></h4>
-        <h4>Answer C) <button type="submit" name="answer" value="{{ question.answer3 }}">{{ question.answer3 }}</button></h4>
-        <h4>Answer D) <button type="submit" name="answer" value="{{ question.answer4 }}">{{ question.answer4 }}</button></h4>
-    </form>
-</div>
+<script>
+    function selectAnswer(answer,num) {
+        document.getElementById("selectedAnswer").value = answer;
+        console.log("Selected answer: " + answer);
+
+        var answerButtons = document.querySelectorAll('.answer-btn');
+        answerButtons.forEach(function(button) {
+            button.style.border = "";
+        });
+        document.getElementsByClassName("answer"+num)[0].style.border = "2px solid gold";
+    }
+</script>
+
+</body>
+</html>
