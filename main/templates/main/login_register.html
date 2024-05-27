@@ -8,16 +8,17 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/login.css' %}">
 </head>
 <body>
-    {% if messages %}
+
+
+    {% if page == 'login' %}
+    <div class="container">
+     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
         <li>{{ message }}</li>
         {% endfor %}
     </ul>
     {% endif %}
-
-    {% if page == 'login' %}
-    <div class="container">
         <form method="POST" action="" class="login-form">
             {% csrf_token %}
             <label for="username">Username:</label>
@@ -30,13 +31,31 @@
     </div>
     {% else %}
     <div class="container">
-        <form method="POST" action="" class="register-form">
+
+            <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Register" />
-        </form>
+
+                     {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+                <label>{{ form.username.label }}</label>
+                    {{ form.username }}
+                <label>{{ form.password1.label }}</label>
+                    {{ form.password1 }}
+
+                 <label>{{ form.password2.label }}</label>
+                    {{ form.password2 }}
+
+                <input type="submit" value="Register">
+            </form>
         <p>Already Signed up? <a href="{% url 'login' %}">Login</a></p>
     </div>
     {% endif %}
+
 </body>
 </html>
