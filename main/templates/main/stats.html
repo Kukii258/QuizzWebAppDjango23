@@ -24,28 +24,30 @@
         <h3>{{ user.username }} Played Quizzes</h3>
         {% for q in quizStats %}
         <div class="quiz-stats">
-            <table class="quiz-table">
-                <thead>
-                    <tr>
-                        <th>Quiz</th>
-                        <th>Correct Answers</th>
-                        <th>Wrong Answers</th>
-                        <th>Time</th>
-                        <th>Time Played</th>
-                        <th>Date Played</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ q.quiz }}</td>
-                        <td>{{ q.correctAnswers }}</td>
-                        <td>{{ q.wrongAnswers }}</td>
-                        <td>{{ q.time }} s</td>
-                        <td>{{ q.timePlayed }}</td>
-                        <td>{{ q.datePlayed}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="quiz-table-wrapper">
+                <table class="quiz-table">
+                    <thead>
+                        <tr>
+                            <th>Quiz</th>
+                            <th>Correct Answers</th>
+                            <th>Wrong Answers</th>
+                            <th>Time</th>
+                            <th>Time Played</th>
+                            <th>Date Played</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ q.quiz }}</td>
+                            <td>{{ q.correctAnswers }}</td>
+                            <td>{{ q.wrongAnswers }}</td>
+                            <td>{{ q.time }} s</td>
+                            <td>{{ q.timePlayed }}</td>
+                            <td>{{ q.datePlayed}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         {% endfor %}
     </div>
