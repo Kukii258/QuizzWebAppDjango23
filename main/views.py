@@ -258,7 +258,8 @@ def prePlayQuiz(request,quiz_id):
 
     quiz = Quiz.objects.get(id=quiz_id)
 
-    quizStats = QuizStatistic.objects.filter(quiz = quiz,timePlayed=1).order_by('time')
+    quizStats = QuizStatistic.objects.filter(quiz=quiz, timePlayed=1, correctAnswers=quiz.numberOfQuestions).order_by('time')
+
 
     context = {'quizStats':quizStats,'q':quiz}
 
