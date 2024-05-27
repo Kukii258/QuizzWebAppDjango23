@@ -18,7 +18,7 @@
         <button><a href="{% url 'createQuiz' %}">Create Quiz</a></button>
 
         <div class="quiz-list">
-            <h3>List of Quizzes</h3>
+            <h3>List of Other People's Quizzes</h3>
             <div>{% for q in quiz %}
                 <div class="quiz-item">
                     <a href="{% url 'prePlayQuiz' q.id %}">
