@@ -34,7 +34,7 @@ def loginPage(request):
         return redirect('homePage')
 
     if request.method == 'POST':
-        username = request.POST.get('username').lower()
+        username = request.POST.get('username')
         password = request.POST.get('password')
         try:
             user = User.objects.get(username=username)
@@ -59,7 +59,7 @@ def registerPage(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.username = user.username.lower()
+            
             user.save()
             login(request, user)
             return redirect('homePage')
