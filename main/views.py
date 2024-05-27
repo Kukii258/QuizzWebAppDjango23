@@ -44,8 +44,6 @@ def loginPage(request):
         if user is not None:
             login(request, user)
             return redirect('homePage')
-        else:
-            messages.error(request, 'Usermae or password not exist')
     context = {'page':page}
     return render(request, 'main/login_register.html', context)
 def logoutUser(request):
@@ -54,6 +52,7 @@ def logoutUser(request):
     return redirect('homePage')
 
 def registerPage(request):
+
     form = UserCreationForm()
 
     if request.method == 'POST':
@@ -65,11 +64,11 @@ def registerPage(request):
             login(request, user)
             return redirect('homePage')
         else:
-            messages.error(request, 'Error.')
+            messages.error(request, 'Passwords do not match.')
 
 
     return render(request, 'main/login_register.html', {'form':form})
-
+    
 def homePage(request):
 
     if Quiz.objects.all().count() > 2:
