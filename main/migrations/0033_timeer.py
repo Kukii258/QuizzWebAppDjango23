@@ -7,17 +7,25 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0032_alter_quiz_options'),
+        ("main", "0032_alter_quiz_options"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Timeer',
+            name="Timeer",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('time1', models.DateTimeField(default=django.utils.timezone.now)),
-                ('time2', models.DateTimeField(default=django.utils.timezone.now)),
-                ('finalTime', models.DateTimeField(default=django.utils.timezone.now)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("time1", models.DateTimeField(default=django.utils.timezone.now)),
+                ("time2", models.DateTimeField(default=django.utils.timezone.now)),
+                ("finalTime", models.DateTimeField(default=django.utils.timezone.now)),
             ],
         ),
     ]

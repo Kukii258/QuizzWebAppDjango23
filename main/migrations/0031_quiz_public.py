@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0030_alter_quizstatistic_dateplayed'),
+        ("main", "0030_alter_quizstatistic_dateplayed"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='quiz',
-            name='public',
+            model_name="quiz",
+            name="public",
             field=models.BooleanField(default=False),
         ),
     ]

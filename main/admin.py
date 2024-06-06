@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Quiz,Question,Answer,Statistic,QuizStatistic,Timeer
+from .models import Quiz, Question, Answer, Statistic, QuizStatistic, Timeer
 
 # Register your models here.
 admin.site.register(Quiz)

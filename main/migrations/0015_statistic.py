@@ -9,18 +9,32 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('main', '0014_rename_usercreator_quiz_author'),
+        ("main", "0014_rename_usercreator_quiz_author"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Statistic',
+            name="Statistic",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quizPlayed', models.IntegerField(default=0)),
-                ('correctAnswers', models.IntegerField(default=0)),
-                ('wrongAnswers', models.IntegerField(default=0)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("quizPlayed", models.IntegerField(default=0)),
+                ("correctAnswers", models.IntegerField(default=0)),
+                ("wrongAnswers", models.IntegerField(default=0)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

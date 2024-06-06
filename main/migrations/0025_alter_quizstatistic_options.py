@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0024_alter_quizstatistic_options'),
+        ("main", "0024_alter_quizstatistic_options"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='quizstatistic',
+            name="quizstatistic",
             options={},
         ),
     ]

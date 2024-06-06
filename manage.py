@@ -6,11 +6,15 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    environment = os.environ.get('DJANGO_ENV')
-    if environment == 'prod':
-        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'QuizzWebAppDjango.settings.prod')
+    environment = os.environ.get("DJANGO_ENV")
+    if environment == "prod":
+        os.environ.setdefault(
+            "DJANGO_SETTINGS_MODULE", "QuizzWebAppDjango.settings.prod"
+        )
     else:
-        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'QuizzWebAppDjango.settings.dev')
+        os.environ.setdefault(
+            "DJANGO_SETTINGS_MODULE", "QuizzWebAppDjango.settings.dev"
+        )
 
     try:
         from django.core.management import execute_from_command_line
@@ -23,5 +27,5 @@ def main():
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -9,26 +9,30 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('main', '0002_alter_quiz_brojpitanja'),
+        ("main", "0002_alter_quiz_brojpitanja"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='question',
-            old_name='pitanje1',
-            new_name='pitanje',
+            model_name="question",
+            old_name="pitanje1",
+            new_name="pitanje",
         ),
         migrations.RemoveField(
-            model_name='quiz',
-            name='brojPitanja',
+            model_name="quiz",
+            name="brojPitanja",
         ),
         migrations.RemoveField(
-            model_name='quiz',
-            name='user',
+            model_name="quiz",
+            name="user",
         ),
         migrations.AddField(
-            model_name='quiz',
-            name='creator',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="quiz",
+            name="creator",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

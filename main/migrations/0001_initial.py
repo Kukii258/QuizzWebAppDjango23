@@ -15,27 +15,60 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Quiz',
+            name="Quiz",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('imeQuiza', models.CharField(max_length=100)),
-                ('brojPitanja', models.IntegerField(max_length=11)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("imeQuiza", models.CharField(max_length=100)),
+                ("brojPitanja", models.IntegerField(max_length=11)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Question',
+            name="Question",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('pitanje1', models.CharField(max_length=100)),
-                ('odgovor1', models.CharField(max_length=100)),
-                ('odgovor2', models.CharField(max_length=100)),
-                ('odgovor3', models.CharField(max_length=100)),
-                ('odgovor4', models.CharField(max_length=100)),
-                ('tocanOdgovor', models.CharField(max_length=100)),
-                ('odgovorKorisnika', models.CharField(max_length=100)),
-                ('quizz', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.quiz')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("pitanje1", models.CharField(max_length=100)),
+                ("odgovor1", models.CharField(max_length=100)),
+                ("odgovor2", models.CharField(max_length=100)),
+                ("odgovor3", models.CharField(max_length=100)),
+                ("odgovor4", models.CharField(max_length=100)),
+                ("tocanOdgovor", models.CharField(max_length=100)),
+                ("odgovorKorisnika", models.CharField(max_length=100)),
+                (
+                    "quizz",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="main.quiz"
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

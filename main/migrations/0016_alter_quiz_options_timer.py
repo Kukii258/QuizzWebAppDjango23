@@ -10,22 +10,36 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('main', '0015_statistic'),
+        ("main", "0015_statistic"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='quiz',
-            options={'ordering': ['-updated', '-created']},
+            name="quiz",
+            options={"ordering": ["-updated", "-created"]},
         ),
         migrations.CreateModel(
-            name='Timer',
+            name="Timer",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('start_time', models.DateTimeField(blank=True, null=True)),
-                ('end_time', models.DateTimeField(blank=True, null=True)),
-                ('elapsed_time', models.DurationField(default=datetime.timedelta)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("start_time", models.DateTimeField(blank=True, null=True)),
+                ("end_time", models.DateTimeField(blank=True, null=True)),
+                ("elapsed_time", models.DurationField(default=datetime.timedelta)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

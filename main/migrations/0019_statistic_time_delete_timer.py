@@ -6,16 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0018_alter_timer_user'),
+        ("main", "0018_alter_timer_user"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='statistic',
-            name='time',
+            model_name="statistic",
+            name="time",
             field=models.FloatField(default=0),
         ),
         migrations.DeleteModel(
-            name='Timer',
+            name="Timer",
         ),
     ]

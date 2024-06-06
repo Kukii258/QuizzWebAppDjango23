@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0020_remove_statistic_time_quizstatistic'),
+        ("main", "0020_remove_statistic_time_quizstatistic"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='quizstatistic',
-            name='quizName',
+            model_name="quizstatistic",
+            name="quizName",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
     ]

@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0023_remove_quizstatistic_quizname'),
+        ("main", "0023_remove_quizstatistic_quizname"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='quizstatistic',
-            options={'ordering': ['-datePlayed']},
+            name="quizstatistic",
+            options={"ordering": ["-datePlayed"]},
         ),
     ]

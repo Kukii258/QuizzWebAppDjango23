@@ -9,25 +9,45 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('main', '0019_statistic_time_delete_timer'),
+        ("main", "0019_statistic_time_delete_timer"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='statistic',
-            name='time',
+            model_name="statistic",
+            name="time",
         ),
         migrations.CreateModel(
-            name='QuizStatistic',
+            name="QuizStatistic",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('correctAnswers', models.IntegerField(default=0)),
-                ('wrongAnswers', models.IntegerField(default=0)),
-                ('datePlayed', models.DateTimeField(auto_now_add=True)),
-                ('time', models.FloatField(default=0)),
-                ('timePlayed', models.IntegerField(default=0)),
-                ('quiz', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.quiz')),
-                ('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("correctAnswers", models.IntegerField(default=0)),
+                ("wrongAnswers", models.IntegerField(default=0)),
+                ("datePlayed", models.DateTimeField(auto_now_add=True)),
+                ("time", models.FloatField(default=0)),
+                ("timePlayed", models.IntegerField(default=0)),
+                (
+                    "quiz",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="main.quiz"
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
