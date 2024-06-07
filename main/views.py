@@ -1,7 +1,7 @@
 from pstats import Stats
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Quiz, Question, Answer, Statistic, QuizStatistic, Timeer
+from .models import Quiz, Question, Answer, Statistic, QuizStatistic, Timer
 from .forms import QuizForm, QuestionForm, AnswerForm
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -12,9 +12,8 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.utils import timezone
 from django.db.models import Q
-from django.shortcuts import render
 
-
+# Initialize session variables if they do not exist
 def initialize_session_variables(request):
     if "counter" not in request.session:
         request.session["counter"] = 0
@@ -22,14 +21,15 @@ def initialize_session_variables(request):
         request.session["counter1"] = 0
 
 
-def loginPage(request):
+# User login view
+def login_page(request):
 
     page = "login"
 
     initialize_session_variables(request)
 
     if request.user.is_authenticated:
-        return redirect("homePage")
+        return redirect("home_page")
 
     if request.method == "POST":
         username = request.POST.get("username")
@@ -41,18 +41,20 @@ def loginPage(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("homePage")
+            return redirect("home_page")
     context = {"page": page}
     return render(request, "main/login_register.html", context)
 
 
-def logoutUser(request):
+# User logout view
+def logout_user(request):
     request.session.flush()
     logout(request)
-    return redirect("homePage")
+    return redirect("home_page")
 
 
-def registerPage(request):
+# User registration view
+def register_page(request):
 
     form = UserCreationForm()
 
@@ -63,17 +65,18 @@ def registerPage(request):
 
             user.save()
             login(request, user)
-            return redirect("homePage")
+            return redirect("home_page")
         else:
             messages.error(request, "Passwords do not match.")
 
     return render(request, "main/login_register.html", {"form": form})
 
 
-def homePage(request):
+# Home page view with quiz search functionality
+def home_page(request):
 
     if Quiz.objects.all().count() > 2:
-        quizNull(request)
+        reset_quiz_statistics(request)
 
     q = request.GET.get("q") if request.GET.get("q") != None else ""
 
@@ -83,11 +86,12 @@ def homePage(request):
 
     context = {"quiz": quiz}
 
-    return render(request, "main/homePage.html", context)
+    return render(request, "main/home_page.html", context)
 
 
+# View to create a new quiz
 @login_required(login_url="/login")
-def createQuiz(request):
+def create_quiz(request):
     form = QuizForm()
 
     if request.method == "POST":
@@ -97,14 +101,15 @@ def createQuiz(request):
             if quiz.numberOfQuestions > 0:
                 quiz.author = request.user
                 quiz.save()
-                return redirect("createQuestions", quiz_id=quiz.id)
+                return redirect("create_questions", quiz_id=quiz.id)
 
     context = {"form": form}
-    return render(request, "main/createQuiz.html", context)
+    return render(request, "main/create_quiz.html", context)
 
 
+# View to create questions for a quiz
 @login_required(login_url="/login")
-def createQuestions(request, quiz_id):
+def create_questions(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
     form = QuestionForm()
     error_message = ""
@@ -131,21 +136,23 @@ def createQuestions(request, quiz_id):
                     request.method = "GET"
                 else:
                     request.session["counter"] = 0
-                    return redirect("homePage")
+                    return redirect("home_page")
             else:
-                error_message = "Tocan odgovor se ne podudara s niti jednim odgovorom"
+                error_message = "Right answer dosen't match with any answers"
 
     context = {"form": form, "quiz": quiz, "error_message": error_message}
-    return render(request, "main/createQuestions.html", context)
+    return render(request, "main/create_questions.html", context)
 
 
-def prePlayCheck(request, quiz_id):
-    quizNull(request)
-    return redirect("playQuiz", quiz_id=quiz_id)
+# View to reset quiz statistics before playing a quiz
+def pre_play_check(request, quiz_id):
+    reset_quiz_statistics(request)
+    return redirect("play_quiz", quiz_id=quiz_id)
 
 
+# View to play a quiz
 @login_required(login_url="/login")
-def playQuiz(request, quiz_id):
+def play_quiz(request, quiz_id):
 
     quiz = get_object_or_404(Quiz, id=quiz_id)
     questionsList = Question.objects.filter(quizz=quiz)
@@ -154,7 +161,7 @@ def playQuiz(request, quiz_id):
 
     if request.session["counter1"] == 0:
         timer = timezone.now()
-        tim = Timeer.objects.create(time1=timer)
+        tim = Timer.objects.create(time1=timer)
 
         quizStats = QuizStatistic.objects.create(quiz=quiz, user=request.user)
 
@@ -170,25 +177,28 @@ def playQuiz(request, quiz_id):
                 rightAnswer=questionsList[request.session["counter"]].rightAnswer,
                 player=request.user,
             )
-            userStatistics(request, questionsList[request.session["counter"]].id, a.id)
+            update_user_statistics(
+                request, questionsList[request.session["counter"]].id, a.id
+            )
             request.session["counter"] += 1
             if request.session["counter"] >= len(questionsList):
                 request.session["counter"] = 0
                 request.session["counter1"] = 0
-                tim2 = Timeer.objects.all().last()
+                tim2 = Timer.objects.all().last()
                 timerrr = (timezone.now() - tim2.time1).total_seconds()
                 quizStats = QuizStatistic.objects.filter(user=request.user).last()
                 quizStats.time = round(timerrr, 2)
                 quizStats.save()
-                return redirect("afterPlayQuiz", quiz_id=quiz_id)
+                return redirect("after_play_quiz", quiz_id=quiz_id)
             else:
                 request.method = "GET"
 
     context = {"question": questionsList[request.session["counter"]], "quiz": quiz}
-    return render(request, "main/playQuiz.html", context)
+    return render(request, "main/play_quiz.html", context)
 
 
-def userStatistics(request, question_id, answer_id):
+# Function to update user statistics
+def update_user_statistics(request, question_id, answer_id):
 
     question = get_object_or_404(Question, id=question_id)
     stats = get_object_or_404(Statistic, user=request.user)
@@ -217,10 +227,11 @@ def userStatistics(request, question_id, answer_id):
     stats.save()
 
 
+# View to display user statistics
 @login_required(login_url="/login")
-def stats(request):
+def user_statistic(request):
 
-    quizNull(request)
+    reset_quiz_statistics(request)
 
     user = User.objects.get(id=request.user.id)
 
@@ -230,27 +241,30 @@ def stats(request):
 
     context = {"stats": stats, "quizStats": quizStats}
 
-    return render(request, "main/stats.html", context)
+    return render(request, "main/statistics.html", context)
 
 
+# Function that create user statistics upon user creation
 @receiver(post_save, sender=User)
 def create_user_statistic(sender, instance, created, **kwargs):
     if created:
         Statistic.objects.create(user=instance)
 
 
+# View to display quizzes created by the user
 @login_required(login_url="/login")
-def userQuizes(request):
+def user_quizzes(request):
 
     user = User.objects.get(id=request.user.id)
     quizzes = Quiz.objects.filter(author=user)
 
     context = {"user": user, "quizzes": quizzes}
 
-    return render(request, "main/userQuizes.html", context)
+    return render(request, "main/user_quizzes.html", context)
 
 
-def quizStats(request, quiz_id, time):
+# Function to create quiz statistics
+def create_quiz_statistics(request, quiz_id, time):
 
     user = User.objects.get(id=request.user.id)
     quiz = Quiz.objects.get(id=quiz_id)
@@ -267,7 +281,8 @@ def quizStats(request, quiz_id, time):
     )
 
 
-def quizNull(request):
+# Function to reset quiz statistics, like timer and counters
+def reset_quiz_statistics(request):
 
     quizStatistic = QuizStatistic.objects.all().last()
     if quizStatistic:
@@ -278,7 +293,8 @@ def quizNull(request):
             request.session["timer"] = 0
 
 
-def prePlayQuiz(request, quiz_id):
+# View to display user statistic of selected quiz before playing it
+def pre_play_quiz(request, quiz_id):
 
     quiz = Quiz.objects.get(id=quiz_id)
 
@@ -288,27 +304,28 @@ def prePlayQuiz(request, quiz_id):
 
     context = {"quizStats": quizStats, "q": quiz}
 
-    return render(request, "main/prePlayQuiz.html", context)
+    return render(request, "main/pre_play_quiz.html", context)
 
 
-def deleteQuiz(request, quiz_id):
+def delete_quiz(request, quiz_id):
 
     quiz = Quiz.objects.get(id=quiz_id)
     quiz.delete()
-    return redirect("userQuizes")
+    return redirect("user_quizzes")
 
 
-def changePublicity(request, quiz_id):
+def toggle_quiz_publicity(request, quiz_id):
     quiz = Quiz.objects.get(id=quiz_id)
     if quiz.public:
         quiz.public = False
     else:
         quiz.public = True
     quiz.save()
-    return redirect("userQuizes")
+    return redirect("user_quizzes")
 
 
-def afterPlayQuiz(request, quiz_id):
+# View to display quiz statistics after quiz had been played
+def after_play_quiz(request, quiz_id):
 
     quiz = Quiz.objects.get(id=quiz_id)
     numberOfQuestions = quiz.numberOfQuestions
@@ -321,4 +338,4 @@ def afterPlayQuiz(request, quiz_id):
 
     context = {"quiz": quiz, "questions": answer, "time": time}
 
-    return render(request, "main/afterPlayQuiz.html", context)
+    return render(request, "main/after_play_quiz.html", context)

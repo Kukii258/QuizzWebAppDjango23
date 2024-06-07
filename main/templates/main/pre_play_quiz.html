@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quiz Page</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/prePlayQuiz.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/pre_play_quiz.css' %}">
 </head>
 <body>
 {% include 'navbar.html' %}
 
     <div class="container">
-        <a href="{% url 'prePlayCheck' q.id %}" class="play-link"><h4>Play: {{ q.quizName }}</h4></a>
+        <a href="{% url 'pre_play_check' q.id %}" class="play-link"><h4>Play: {{ q.quizName }}</h4></a>
 
         <div class="quiz-stats">
             {% for qs in quizStats %}
@@ -20,7 +20,6 @@
                 <p><span class="label">Name:</span> {{ qs.user }}</p>
                 <p><span class="label">Time Played:</span> {{ qs.timePlayed }}</p>
                 <p><span class="label">Time:</span> {{ qs.time }}</p>
-                <p><span class="label">Quiz:</span> {{ qs.quiz }}</p>
             </div>
             {% endfor %}
         </div>

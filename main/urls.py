@@ -2,22 +2,28 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("stats/", views.stats, name="stats"),
-    path("login/", views.loginPage, name="login"),
-    path("register/", views.registerPage, name="register"),
-    path("logout/", views.logoutUser, name="logout"),
-    path("", views.homePage, name="homePage"),
-    path("createQuiz/", views.createQuiz, name="createQuiz"),
+    path("stats/", views.user_statistic, name="stats"),
+    path("login/", views.login_page, name="login"),
+    path("register/", views.register_page, name="register"),
+    path("logout/", views.logout_user, name="logout"),
+    path("", views.home_page, name="home_page"),
+    path("create-quiz/", views.create_quiz, name="create_quiz"),
     path(
-        "createQuestions/<int:quiz_id>/", views.createQuestions, name="createQuestions"
+        "create-questions/<int:quiz_id>/",
+        views.create_questions,
+        name="create_questions",
     ),
-    path("playQuiz/<int:quiz_id>/", views.playQuiz, name="playQuiz"),
-    path("prePlayCheck/<int:quiz_id>/", views.prePlayCheck, name="prePlayCheck"),
-    path("prePlayQuiz/<int:quiz_id>/", views.prePlayQuiz, name="prePlayQuiz"),
-    path("userQuizes/", views.userQuizes, name="userQuizes"),
-    path("deleteQuiz/<int:quiz_id>/", views.deleteQuiz, name="deleteQuiz"),
+    path("play-quiz/<int:quiz_id>/", views.play_quiz, name="play_quiz"),
+    path("pre-play-check/<int:quiz_id>/", views.pre_play_check, name="pre_play_check"),
+    path("pre-play-quiz/<int:quiz_id>/", views.pre_play_quiz, name="pre_play_quiz"),
+    path("user-quizzes/", views.user_quizzes, name="user_quizzes"),
+    path("delete-quiz/<int:quiz_id>/", views.delete_quiz, name="delete_quiz"),
     path(
-        "changePublicity/<int:quiz_id>/", views.changePublicity, name="changePublicity"
+        "change-publicity/<int:quiz_id>/",
+        views.toggle_quiz_publicity,
+        name="change_publicity",
     ),
-    path("afterPlayQuiz/<int:quiz_id>/", views.afterPlayQuiz, name="afterPlayQuiz"),
+    path(
+        "after-play-quiz/<int:quiz_id>/", views.after_play_quiz, name="after_play_quiz"
+    ),
 ]

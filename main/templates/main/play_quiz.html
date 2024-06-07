@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quiz Question</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/PlayQuiz.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/play_quiz.css' %}">
 </head>
 <body>
 <div class="quiz-container">
@@ -14,7 +14,7 @@
         <h2>Question: {{ question.question }}</h2>
     </div>
     <div class="answers-container">
-        <form id="quiz-form" method="POST" action="{% url 'playQuiz' quiz.id %}">
+        <form id="quiz-form" method="POST" action="{% url 'play_quiz' quiz.id %}">
             {% csrf_token %}
             <div class="answer">
                 <h4>Answer A) <button type="button" name="answer" value="{{ question.answer1 }}" class="answer-btn answer1" onclick="selectAnswer('{{ question.answer1 }}',1)">{{ question.answer1 }}</button></h4>

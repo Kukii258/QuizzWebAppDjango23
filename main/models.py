@@ -29,7 +29,7 @@ class Quiz(models.Model):
         return self.quizName
 
 
-class Timeer(models.Model):
+class Timer(models.Model):
     time1 = models.DateTimeField(default=timezone.now)
     time2 = models.DateTimeField(default=timezone.now)
     finalTime = models.DateTimeField(default=timezone.now)

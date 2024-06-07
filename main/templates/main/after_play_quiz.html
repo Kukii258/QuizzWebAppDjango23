@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Results</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/afterPlayQuiz.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/after_play_quiz.css' %}">
 </head>
 <body>
     <h3>Quiz Name: {{ quiz.quizName }}</h3>
@@ -22,6 +22,6 @@
     <div class="time-container">
         <h4>Time : {{ time }}</h4>
     </div>
-    <a href="{% url 'homePage' %}"><h4>Back to Main Page</h4></a>
+    <a href="{% url 'home_page' %}"><h4>Back to Main Page</h4></a>
 </body>
 </html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/userQuizes.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/user_quizzes.css' %}">
     <title>User Quizzes</title>
 </head>
 <body>
@@ -18,10 +18,10 @@
     <div class="quiz-list">
         {% for q in quizzes %}
         <div class="quiz-item">
-            <a href="{% url 'playQuiz' q.id %}" class="quiz-name">Name: {{ q.quizName }}</a>
+            <a href="{% url 'play_quiz' q.id %}" class="quiz-name">Name: {{ q.quizName }}</a>
             <p>Number of Questions: {{ q.numberOfQuestions }}</p>
-            <a href="{% url 'changePublicity' q.id %}" class="quiz-publicity">Change Publicity: {{ q.public }}</a>
-            <a href="{% url 'deleteQuiz' q.id %}" class="delete-quiz">DELETE QUIZ</a>
+            <a href="{% url 'change_publicity' q.id %}" class="quiz-publicity">Change Publicity: {{ q.public }}</a>
+            <a href="{% url 'delete_quiz' q.id %}" class="delete-quiz">DELETE QUIZ</a>
         </div>
         {% endfor %}
     </div>
