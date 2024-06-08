@@ -13,7 +13,7 @@ from django.db.models.signals import post_save
 from django.utils import timezone
 from django.db.models import Q
 
-# Initialize session variables if they do not exist
+# Initialize session variables if they do not exist 
 def initialize_session_variables(request):
     if "counter" not in request.session:
         request.session["counter"] = 0
